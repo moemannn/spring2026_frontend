@@ -1,5 +1,8 @@
 <template>
-  <div class="w-56 bg-gray-800 p-3">
+  <div class="w-64 bg-gray-800 p-3">
+
+    <SearchBar v-model="search" @search="handleSearch" />
+
     <div class="font-bold mb-3">Friends:</div>
 
     <div class="space-y-2 text-sm">
@@ -33,6 +36,8 @@
 </template>
 
 <script setup>
+import SearchBar from '../components/SearchBar.vue'
+
 defineEmits(['select'])
 
 const props = defineProps({
@@ -44,4 +49,6 @@ const getClass = (name) => {
     ? 'font-semibold text-white'
     : 'text-gray-400 hover:text-white'
 }
+
+
 </script>

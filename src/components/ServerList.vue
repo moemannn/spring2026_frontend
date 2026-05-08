@@ -7,19 +7,19 @@
       </div>
     </router-link>
 
-    <router-link to="/chat">
+    <router-link to="/server">
       <div class="w-30 h-12 rounded-xl bg-blue-600 cursor-pointer flex items-center justify-center text-white">
         Server
       </div>
     </router-link>
 
-    <router-link to="/chat">
+    <router-link to="/server">
       <div class="w-30 h-12 rounded-xl bg-blue-600 cursor-pointer flex items-center justify-center text-white">
         Server
       </div>
     </router-link>
 
-    <router-link to="/chat">
+    <router-link to="/server">
       <div class="w-30 h-12 rounded-xl bg-blue-600 cursor-pointer flex items-center justify-center text-white">
         Server
       </div>
