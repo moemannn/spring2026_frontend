@@ -2,7 +2,7 @@
   <div class="flex-1 flex flex-col bg-gray-900">
 
     <!-- messages -->
-    <div class="flex-1 p-4 space-y-3 overflow-y-auto">
+    <div ref="messagesContainer" class="flex-1 p-4 space-y-3 overflow-y-auto">
 
       <template v-for="(msg, index) in messages" :key="index">
 
@@ -47,21 +47,42 @@
 </template>
 
 <script setup>
+import { ref, nextTick, watch } from 'vue'
 import ChatMessage from './ChatMessage.vue'
 
-const messages = [
-  { user: 'Ricardo', text: 'Lorem ipsum dolor sit amet.', isMine: true, time: '10:01', date: '2026-05-08' },
-  { user: 'Alex', text: 'Sed do eiusmod tempor.', isMine: false, time: '10:02', date: '2026-05-08' },
-  { user: 'Sam', text: 'Ut enim ad minim veniam.', isMine: false, time: '10:03', date: '2026-05-08' },
+const messagesContainer = ref(null)
 
+const scrollToBottom = async () => {
+  await nextTick()
+  if (messagesContainer.value) {
+    messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
+  }
+}
+
+const messages = [
+  // 2026-05-05 (oldest)
+  { user: 'Alex', text: 'Quisque a lectus.', isMine: false, time: '09:10', date: '2026-05-05' },
+  { user: 'Sam', text: 'Nam nulla quam.', isMine: false, time: '09:12', date: '2026-05-05' },
+  { user: 'Ricardo', text: 'Pellentesque fermentum.', isMine: true, time: '09:14', date: '2026-05-05' },
+
+  // 2026-05-07
   { user: 'Ricardo', text: 'Duis aute irure dolor.', isMine: true, time: '14:20', date: '2026-05-07' },
   { user: 'Alex', text: 'Excepteur sint occaecat.', isMine: false, time: '14:22', date: '2026-05-07' },
   { user: 'Sam', text: 'Curabitur pretium tincidunt.', isMine: false, time: '14:25', date: '2026-05-07' },
 
-  { user: 'Alex', text: 'Quisque a lectus.', isMine: false, time: '09:10', date: '2026-05-05' },
-  { user: 'Sam', text: 'Nam nulla quam.', isMine: false, time: '09:12', date: '2026-05-05' },
-  { user: 'Ricardo', text: 'Pellentesque fermentum.', isMine: true, time: '09:14', date: '2026-05-05' }
+  // 2026-05-08 (newest)
+  { user: 'Ricardo', text: 'Lorem ipsum dolor sit amet.', isMine: true, time: '10:01', date: '2026-05-08' },
+  { user: 'Alex', text: 'Sed do eiusmod tempor.', isMine: false, time: '10:02', date: '2026-05-08' },
+  { user: 'Sam', text: 'Ut enim ad minim veniam.', isMine: false, time: '10:03', date: '2026-05-08' }
 ]
+
+// scroll bij eerste load
+scrollToBottom()
+
+// scroll bij nieuwe messages
+watch(messages, () => {
+  scrollToBottom()
+}, { deep: true })
 
 const openProfile = (user) => {
   console.log('Open profile:', user)

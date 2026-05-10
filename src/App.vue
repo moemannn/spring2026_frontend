@@ -1,10 +1,10 @@
 <template>
   <div class="flex">
-    <ServerList />
+    <NavBar />
     <router-view class="flex-1" />
   </div>
 </template>
 
 <script setup>
-import ServerList from './components/ServerList.vue'
+import NavBar from './components/NavBar.vue'
 </script>

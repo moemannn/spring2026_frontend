@@ -31,9 +31,9 @@
 <script setup>
 import { ref } from 'vue'
 
-import ChannelList from '../components/ChannelList.vue'
-import ChatWindow from '../components/ChatWindow.vue'
-import UserList from '../components/UserList.vue'
+import ChannelList from '../components/lists/ChannelList.vue'
+import ChatWindow from '../components/chat/ChatWindow.vue'
+import UserList from '../components/lists/UserList.vue'
 
 const activeChat = ref(null)
 
